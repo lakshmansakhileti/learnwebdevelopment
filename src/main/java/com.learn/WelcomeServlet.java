@@ -13,7 +13,7 @@ public class WelcomeServlet extends HttpServlet {
         res.setContentType("text/html");//setting the content type
 
         try {
-            Thread.currentThread().sleep(1000 * 6);
+            Thread.currentThread().sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
