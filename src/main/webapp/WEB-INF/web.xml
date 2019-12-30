@@ -15,25 +15,69 @@
         <url-pattern>/welcome</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>secureResource</servlet-name>
-        <servlet-class>com.learn.HowToSecureResource</servlet-class>
-    </servlet>
+    <!--<servlet>
+          <servlet-name>secureResource</servlet-name>
+          <servlet-class>com.learn.FormBasedAuthentication</servlet-class>
+        </servlet>
 
-    <servlet-mapping>
-        <servlet-name>secureResource</servlet-name>
-        <url-pattern>/how_to_secure_resource</url-pattern>
-    </servlet-mapping>
+      <servlet-mapping>
+          <servlet-name>secureResource</servlet-name>
+          <url-pattern>/form_based_authentication</url-pattern>
+      </servlet-mapping> -->
 
-   <!-- <security-constraint>
+   <!-- Authorisation configuration starts here-->
+    <security-constraint>
+      <web-resource-collection>
+          <web-resource-name>welcome page</web-resource-name>
+          <url-pattern>/learn</url-pattern>
+          <http-method>POST</http-method>
+      </web-resource-collection>
+      <auth-constraint>
+          <description>Any user wants to edit welcome page should have editor role</description>
+          <role-name>EDITOR</role-name>
+      </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>SecurityConstraint</display-name>
         <web-resource-collection>
-            <web-resource-name>secureResource</web-resource-name>
-            <url-pattern>/how_  to_secure_resource</url-pattern>
+            <web-resource-name>WRCollection</web-resource-name>
+            <url-pattern>/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            sales
+            <role-name>learner</role-name>
         </auth-constraint>
-    </security-constraint>-->
+      <!--  <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>-->
+    </security-constraint>
 
+    <!-- Authorisation configuration ends here -->
 
+    <!-- Authentication configuration started here -->
+    
+    <!-- Form based authentication -->
+  <!--  <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/Login.jsp</form-login-page>
+            <form-error-page>/Login_failed.jsp</form-error-page>
+        </form-login-config>
+    </login-config>-->
+
+    <!-- This is basic authentication configuration -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+    </login-config>
+
+    <!-- Authentication configuration ends here -->
+
+    <!-- Security role configuration -->
+    <security-role>
+        <role-name>learner</role-name>
+    </security-role>
+    <security-role>
+        <role-name>EDITOR</role-name>
+    </security-role>
+    <!-- Security role configuration ends here> -->
 </web-app>
